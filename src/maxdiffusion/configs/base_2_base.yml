@@ -49,10 +49,10 @@ mesh_axes: ['data', 'fsdp', 'tensor']
 logical_axis_rules: [
                       ['batch', 'data'],
                       ['activation_batch', 'data'],
-                      ['activation_length', 'fsdp'],
-                      ['out_channels', 'fsdp'],
-                      ['conv_out', 'fsdp'],
-                      ['length', 'fsdp']
+                      ['activation_length', 'tensor'],
+                      ['out_channels', 'tensor'],
+                      ['conv_out', 'tensor'],
+                      ['length', 'tensor']
                     ]
 data_sharding: [['data', 'fsdp', 'tensor']]
 
@@ -63,9 +63,9 @@ data_sharding: [['data', 'fsdp', 'tensor']]
 dcn_data_parallelism: -1  # recommended DCN axis to be auto-sharded
 dcn_fsdp_parallelism: 1
 dcn_tensor_parallelism: 1
-ici_data_parallelism: -1 # recommended ICI axis to be auto-sharded for TPUv5e 
+ici_data_parallelism: 2 # recommended ICI axis to be auto-sharded for TPUv5e 
 ici_fsdp_parallelism: 1  # recommended ICI axis to be auto-sharded
-ici_tensor_parallelism: 1
+ici_tensor_parallelism: 2
 
 # Dataset
 # Replace with dataset path or train_data_dir. One has to be set.
@@ -99,7 +99,7 @@ max_train_steps: 800
 seed: 0
 output_dir: 'sd-model-finetuned'
 tensorboard_dir: 'gs://shahrokhi-maxdiffusion-v5'
-per_device_batch_size: 1
+per_device_batch_size: 4
 
 cosine_learning_rate_final_fraction: 0.1 
 warmup_steps_fraction: 0.1
